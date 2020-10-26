@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,8 @@ namespace PPChat.Models
         public string LastName { get; set; }
         public bool Gender { get; set; }
         public string Position { get; set; }
-        public byte[] ProfileImage { get; set; }  
+        public Guid ProfileImageId { get; set; }
+        [ForeignKey("ProfileImageId")]
+        public virtual Image ProfileImage { get; set; }  
     }
 }

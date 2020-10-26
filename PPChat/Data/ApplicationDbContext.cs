@@ -17,5 +17,18 @@ namespace PPChat.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<Image> Images { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ApplicationUser>()
+                .HasOne<Image>(u => u.ProfileImage)
+                .WithMany()
+                .HasForeignKey(c => c.ProfileImageId)
+                .OnDelete(DeleteBehavior.NoAction);
+                
+        }
     }
 }
